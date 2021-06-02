@@ -1,6 +1,7 @@
 'use strict';
 
 
+
 const tictacBase =  function(){
     let _game_log = [];
     let _current={x:0,o=0,free:511,log:[]};
@@ -26,6 +27,33 @@ const tictacBase =  function(){
         _current_o = 0;
         _current_free = 511;
     }
+    const _stepTranslate = function(step){
+        let p = _possitions;
+        if ([...p[0], ...p[1], ...p[2]].indexOf(parseInt(step)) > -1)
+            return parseInt(step);
+        if (typeof step !== 'string')
+            return -1;
+        let x=0;
+        let y=0;
+        let done = 0;
+        let col_x = ['a','b','c'];
+        let col_y = ['1','2','3'];
+        for(let i of [0,1])
+            x = col_x.indexOf(step[i].toLowerCase());
+            if(x > -1){
+                done++;
+                break;
+            }
+        for(let i of [0,1])
+            y = col_y.indexOf(step[i]);
+            if(y > -1){
+                done++;
+                break;
+            }
+        if (done === 2)
+           return _positions[x][y];
+        return -1;
+    }
     const _step = function(step){
         if(!_checkFree(step))
             return false;
@@ -38,6 +66,7 @@ const tictacBase =  function(){
         }
         _current.free=_current.x+step;
         _checkWincurrent(_current.x);
+        return true;
     }
 }
 
