@@ -32,6 +32,19 @@ const conquerBase =  function(){
                 out.push(i.name);
         return out;
     }
+    const _newPlayer = function(serial, name){
+        if(typeof name === 'undefined')
+           name = 'player_'+serial.toString();
+        _players[name] = {
+             name,
+             planets :[],
+             cash    :0,
+        };
+        _planetToPlayer(
+            name,
+            _randomNaturalPlanet
+        );
+    }
     const _planetRemoveFromPlayer = function(planet){
         for (let i of _players){
             let n = i.planets.indexOf(planet);
