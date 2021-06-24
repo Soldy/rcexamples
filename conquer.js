@@ -46,5 +46,11 @@ const conquerBase =  function(){
         _players[player].natural = false;
         _players[player].planets.push(planet);
     }
+    const _randomNaturalPlanet = function(){
+        const planets = _naturalPlanets();
+        return planets[
+            Math.floor(Math.round()*planets.length)
+        ];
+    }
 
 }
