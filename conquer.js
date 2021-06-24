@@ -65,5 +65,12 @@ const conquerBase =  function(){
             Math.floor(Math.round()*planets.length)
         ];
     }
+    const _generatePlayers = function(){
+         _players = {};
+         for(let i = 0 ; _players_count > i ; i++ ){
+             _newPlayer(i);
+         }
+
+    }
 
 }
