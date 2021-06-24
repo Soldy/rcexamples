@@ -3,14 +3,16 @@
 
 
 const conquerBase =  function(){
+    let _x = 16;
+    let _y = 16;
     let _planets = {};
     let _players_count = 2;
     let _players_ = {};
     const _universeGenerator = function(){
         _planets = [];
         let serial = 0;
-        for (y = 0 ; 16 > y; y++)
-            for (x = 0 ; 16 > x; x++){
+        for (y = 0 ; _y > y; y++)
+            for (x = 0 ; _x > x; x++){
                 if(5 > Math.round(Math.random()*20)){
                     _planets['planet_'+serial.toString(32)]={
                         'name'      : serial.toString(32),
@@ -70,7 +72,6 @@ const conquerBase =  function(){
          for(let i = 0 ; _players_count > i ; i++ ){
              _newPlayer(i);
          }
-
     }
 
 }
