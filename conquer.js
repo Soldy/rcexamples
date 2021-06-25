@@ -1,6 +1,6 @@
 'use strict';
 
-
+const $planet = require('./lib/planet.js');
 
 const conquerBase =  function(){
     let _x = 16;
@@ -11,18 +11,15 @@ const conquerBase =  function(){
     const _universeGenerator = function(){
         _planets = [];
         let serial = 0;
-        for (y = 0 ; _y > y; y++)
-            for (x = 0 ; _x > x; x++){
+        for (let y = 0 ; _y > y; y++)
+            for (let x = 0 ; _x > x; x++){
+                let name = ('planet_'+serial.toString(32));
                 if(5 > Math.round(Math.random()*20)){
-                    _planets['planet_'+serial.toString(32)]={
-                        'name'      : serial.toString(32),
-                        'x'         : x,
-                        'y'         : y,
-                        'flot'      : [],
-                        'natural'   : true,
-                        'buildings' : [],
-                        'moons'     : []
-                    });
+                    _planets[name]= new $planet(
+                        name,
+                        x,
+                        y
+                    );
                     serial+;
                 }
             }
@@ -30,7 +27,7 @@ const conquerBase =  function(){
     const _naturalPlanets = function(){
         let out =[];
         for (let i of _planets)
-            if(i.natural)
+            if(i.natural())
                 out.push(i.name);
         return out;
     }
@@ -39,27 +36,17 @@ const conquerBase =  function(){
            name = 'player_'+serial.toString();
         _players[name] = {
              name,
-             planets :[],
-             cash    :0,
         };
         _planetToPlayer(
             name,
-            _randomNaturalPlanet
+            _planets[
+                _randomNaturalPlanet()
+            ]
         );
     }
-    const _planetRemoveFromPlayer = function(planet){
-        for (let i of _players){
-            let n = i.planets.indexOf(planet);
-            if(0>n)
-                continue;
-            i.planets.splice(n,1);
-        }
-        _players[player].natural = true;
-    }
     const _planetToPlayer = function(player, planet){
-        _planetRemoveFromPlayer(planet)
-        _players[player].natural = false;
-        _players[player].planets.push(planet);
+        _planets[planet].toPlayer(_players[player]);
+        _players[player].planetAdd(planet);
     }
     const _randomNaturalPlanet = function(){
         const planets = _naturalPlanets();
