@@ -7,7 +7,7 @@ const conquerBase =  function(){
     let _y = 16;
     let _planets = {};
     let _players_count = 2;
-    let _players_ = {};
+    let _players = {};
     const _universeGenerator = function(){
         _planets = [];
         let serial = 0;
@@ -20,22 +20,22 @@ const conquerBase =  function(){
                         x,
                         y
                     );
-                    serial+;
+                    serial++;
                 }
             }
-    }
+    };
     const _naturalPlanets = function(){
         let out =[];
         for (let i of _planets)
             if(i.natural())
                 out.push(i.name);
         return out;
-    }
+    };
     const _newPlayer = function(serial, name){
         if(typeof name === 'undefined')
-           name = 'player_'+serial.toString();
+            name = 'player_'+serial.toString();
         _players[name] = {
-             name,
+            name,
         };
         _planetToPlayer(
             name,
@@ -43,22 +43,22 @@ const conquerBase =  function(){
                 _randomNaturalPlanet()
             ]
         );
-    }
+    };
     const _planetToPlayer = function(player, planet){
         _planets[planet].toPlayer(_players[player]);
         _players[player].planetAdd(planet);
-    }
+    };
     const _randomNaturalPlanet = function(){
         const planets = _naturalPlanets();
         return planets[
             Math.floor(Math.round()*planets.length)
         ];
-    }
+    };
     const _generatePlayers = function(){
-         _players = {};
-         for(let i = 0 ; _players_count > i ; i++ ){
-             _newPlayer(i);
-         }
-    }
+        _players = {};
+        for(let i = 0 ; _players_count > i ; i++ ){
+            _newPlayer(i);
+        }
+    };
 
-}
+};
