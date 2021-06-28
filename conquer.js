@@ -1,6 +1,7 @@
 'use strict';
 
 const $planet = require('./lib/planet.js');
+const $player = require('./lib/player.js');
 
 const conquerBase =  function(){
     let _x = 16;
