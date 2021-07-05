@@ -13,7 +13,7 @@ const tictacBase =  function(){
     ];
     const _checkWin = function(current){
         for (let i of _winning)
-            if((current&_current.free)===_current.free)
+            if((current&_winning)===_winning)
                 return true;
         return false;
     }
@@ -67,6 +67,27 @@ const tictacBase =  function(){
         _current.free=_current.x+step;
         _checkWincurrent(_current.x);
         return true;
+    }
+
+    const _render = function(){
+        let out = '';
+        for(let a=0;3>a;a++){
+            for(let b=0;3>b;b++){
+                let position =  _positions[a][b];
+                if((_current.o&position) = position)
+                    out+='o';
+                else if((_current.x&position) = position)
+                    out+='x';
+                else 
+                    out+=' ';
+                if(2>b)
+                  out+='|';
+            }
+            out+='\n';
+            if(2>a)
+               let out+='-+-+-\n';
+        }
+
     }
 }
 
